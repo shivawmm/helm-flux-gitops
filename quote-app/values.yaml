@@ -2,7 +2,7 @@ replicaCount: 2
 
 image:
   repository: shivawmm1810/quote-app
-  tag: "4e7a17e8dc3370c55e042a686c1b4a83df6955ef"
+  tag: "9973a182bf4f5a08da008d85f1b7c3b57495dfc9"
   pullPolicy: Always
 
 service:

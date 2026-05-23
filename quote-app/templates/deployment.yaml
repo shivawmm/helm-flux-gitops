@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: {{ include "quote-app.fullname" . }}
+  namespace: helm-flux-demo
+
+spec:
+  replicas: {{ .Values.replicaCount }}
+
+  selector:
+    matchLabels:
+      app: quote-app
+
+  template:
+    metadata:
+      labels:
+        app: quote-app
+
+    spec:
+      containers:
+        - name: quote-app
+
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+          ports:
+            - containerPort: {{ .Values.containerPort }}
+
+          env:
+            - name: ENVIRONMENT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "quote-app.fullname" . }}-config
+                  key: ENVIRONMENT
+
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

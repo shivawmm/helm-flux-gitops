@@ -1,0 +1,27 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+
+metadata:
+  name: quote-app
+  namespace: flux-system
+
+spec:
+  interval: 1m
+
+  releaseName: quote-app
+
+  targetNamespace: helm-flux-demo
+
+  chart:
+    spec:
+      chart: ./quote-app
+      sourceRef:
+        kind: GitRepository
+        name: helm-flux-gitops
+
+  values:
+    replicaCount: 2
+
+    image:
+      repository: shivawmm1810/quote-app
+      tag: latest

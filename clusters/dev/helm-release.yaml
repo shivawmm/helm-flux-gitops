@@ -18,10 +18,3 @@ spec:
       sourceRef:
         kind: GitRepository
         name: helm-flux-gitops
-
-  values:
-    replicaCount: 2
-
-    image:
-      repository: shivawmm1810/quote-app
-      tag: latest
